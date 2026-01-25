@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Index of files</title>
+<style>
+body { font-family: monospace; padding: 20px; }
+a { text-decoration: none; color: #0066cc; }
+</style>
+</head>
+<body>
+<h2>Index of /</h2>
+<ul id="list"></ul>
+
+<script>
+const user = "thongass000";
+const repo = "kodiplugin";
+const path = "";
+
+fetch(`https://api.github.com/repos/${user}/${repo}/contents/${path}`)
+  .then(r => r.json())
+  .then(data => {
+    const ul = document.getElementById("list");
+    data.forEach(item => {
+      const li = document.createElement("li");
+      const a = document.createElement("a");
+      a.href = item.name + (item.type === "dir" ? "/" : "");
+      a.textContent = item.name + (item.type === "dir" ? "/" : "");
+      li.appendChild(a);
+      ul.appendChild(li);
+    });
+  });
+</script>
+</body>
+</html>
